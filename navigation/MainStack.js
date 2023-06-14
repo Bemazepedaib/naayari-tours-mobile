@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Home from "../screens/Home";
 import MainView from "../screens/MainView";
 import Security from "../screens/Security";
+import Login from "../screens/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,10 @@ function MainStack() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
+                    name="Login"
+                    component={Login}
+                />
+                <Stack.Screen
                     name="Home"
                     component={Home}
                 />
@@ -19,7 +24,7 @@ function MainStack() {
                     name="MainView"
                     component={MainView}
                 />
-                <Stack.Screen 
+                <Stack.Screen
                     name="Security"
                     component={Security}
                 />
