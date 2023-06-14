@@ -8,7 +8,7 @@ function Home({ navigation }) {
             <Text>Buenos días</Text>
             <Button
                 title='Buenas tardes'
-                onPress={ () => navigation.navigate('MainView')}
+                onPress={ () => navigation.navigate('Security')}
             ></Button>
         </View>
     )

@@ -1,33 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native';
-import { useQuery } from '@apollo/client'
-import { gql } from '@apollo/client'
-
-const GET_USERS = gql`
-        query getUsers {
-            users {
-                name
-                cellphone
-                birthDate
-                email
-                password
-                sex
-                reference
-                userType
-                userLevel
-                membership
-            coupons {
-                couponType
-                couponDescription
-                couponAmount
-                couponDate
-                couponApplied
-            }
-            preferences {
-                preferenceType
-            }
-        }
-    }`;
+import { useQuery} from '@apollo/client'
+import { GET_USERS } from '../querys/userQuerys'
 
 function MainView({ navigation }) {
 
