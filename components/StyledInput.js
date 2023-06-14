@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { TextInput, StyleSheet } from 'react-native'
 import theme from './theme'
 
 const styles = StyleSheet.create({
@@ -23,23 +23,28 @@ const styles = StyleSheet.create({
     },
     head: {
         fontSize: theme.fontSizes.head
+    },
+    inputNormal: {
+        padding: theme.inputNormal.padding,
+        borderRadius: theme.inputNormal.border,
+        width: theme.inputNormal.width,
+        height: theme.inputNormal.height,
+        marginTop: theme.inputNormal.margintop,
+        backgroundColor: theme.inputNormal.back
     }
 })
 
-export default function StyledText({ children, color, fontSize, fontWeight, style, ...restOfProps }) {
+export default function StyledInput({ children, color, fontSize, fontWeight, input, style, ...restOfProps }) {
 
     const textStyles = [
         styles.text,
-        color === 'primary' && styles.colorPrimary,
-        color === 'secondary' && styles.colorSecondary,
-        fontSize === 'subheading' && styles.subheading,
-        fontSize === 'head' && styles.head,
-        fontWeight === 'bold' && styles.bold
+
+        input === 'login' && styles.inputNormal
 
     ]
     return (
-        <Text style={textStyles} {...restOfProps}>
+        <TextInput style={textStyles} {...restOfProps}>
             {children}
-        </Text>
+        </TextInput>
     )
 }

@@ -6,7 +6,8 @@ const theme = {
     },
     fontSizes: {
         body: 14,
-        subheading: 16
+        subheading: 20,
+        head: 70
     },
     fonts: {
         main: 'System'
@@ -14,6 +15,15 @@ const theme = {
     fontWeights: {
         normal: '400',
         bold: '700'
+    },
+    inputNormal: {
+        padding: 10,
+        width: '80%',
+        height: 50,
+        border: 30,
+        margintop: 20,
+        back: '#fff'
+
     }
 }
 
