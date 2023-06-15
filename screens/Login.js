@@ -18,8 +18,8 @@ const Login = props => {
             </View>
 
             <View>
-                <StyledButton onPress={onPress}>
-                    <StyledText button='buttonGreen'>Iniciar Sesion</StyledText>
+                <StyledButton button='buttonGreen' onPress={onPress}>
+                    <StyledText color='primary'>Iniciar Sesion</StyledText>
                 </StyledButton>
             </View>
         </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%'
-    }
+    },
 }
 )
 
