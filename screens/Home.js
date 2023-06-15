@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button } from 'react-native';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 
 function Home({ navigation }) {
     return (
@@ -8,7 +7,9 @@ function Home({ navigation }) {
             <Text>Buenos días</Text>
             <Button
                 title='Buenas tardes'
-                onPress={ () => navigation.navigate('Security')}
+                onPress={ () => navigation.navigate('Security', {
+                    tripName: "Real de Acuitapilco"
+                })}
             ></Button>
         </View>
     )
