@@ -4,9 +4,21 @@ import { Text, View } from 'react-native';
 function Itinerary() {
   return (
     <View>
-      <Text>Itinerario</Text>
+      <Text>Naayari Tours</Text>
     </View>
   )
 }
 
+const styles = StyleSheet.create({
+  container: {
+      alignItems: 'center',
+      justifyContent: 'center'
+  },
+  mainInputs: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '90%'
+  },
+}
+)
 export default Itinerary
