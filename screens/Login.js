@@ -22,6 +22,10 @@ const Login = props => {
                     <StyledText color='primary'>Iniciar Sesion</StyledText>
                 </StyledButton>
             </View>
+
+            <StyledButton onPress={onPress}>
+                <StyledText >Tabs</StyledText>
+            </StyledButton>
         </View>
     )
 
