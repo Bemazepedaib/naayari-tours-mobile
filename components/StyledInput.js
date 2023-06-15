@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
-import theme from './theme'
+import theme from './Theme'
 
 const styles = StyleSheet.create({
     text: {
@@ -25,12 +25,14 @@ const styles = StyleSheet.create({
         fontSize: theme.fontSizes.head
     },
     inputNormal: {
+        paddingStart: theme.inputNormal.paddingStart,
         padding: theme.inputNormal.padding,
         borderRadius: theme.inputNormal.border,
         width: theme.inputNormal.width,
         height: theme.inputNormal.height,
         marginTop: theme.inputNormal.margintop,
-        backgroundColor: theme.inputNormal.back
+        backgroundColor: theme.inputNormal.back,
+        color: theme.colors.gray
     }
 })
 
@@ -38,8 +40,8 @@ export default function StyledInput({ children, color, fontSize, fontWeight, inp
 
     const textStyles = [
         styles.text,
-
-        input === 'login' && styles.inputNormal
+        input === 'login' && styles.inputNormal,
+        color === 'gray' && styles.gray
 
     ]
     return (

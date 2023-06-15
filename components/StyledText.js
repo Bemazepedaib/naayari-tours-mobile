@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import theme from './theme'
+import theme from './Theme'
 
 const styles = StyleSheet.create({
     text: {
@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     },
     colorSecondary: {
         color: theme.colors.textSecondary
+    },
+    gray: {
+        color: theme.colors.gray
     },
     bold: {
         fontWeight: theme.fontWeights.bold
@@ -32,6 +35,7 @@ export default function StyledText({ children, color, fontSize, fontWeight, styl
         styles.text,
         color === 'primary' && styles.colorPrimary,
         color === 'secondary' && styles.colorSecondary,
+        color === 'gray' && styles.gray,
         fontSize === 'subheading' && styles.subheading,
         fontSize === 'head' && styles.head,
         fontWeight === 'bold' && styles.bold

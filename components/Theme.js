@@ -2,7 +2,8 @@ const theme = {
     colors: {
         textPrimary: '#24292e',
         textSecondary: '#586069',
-        primary: '#0366d6'
+        primary: '#0366d6',
+        gray: '#999999'
     },
     fontSizes: {
         body: 14,
@@ -22,8 +23,13 @@ const theme = {
         height: 50,
         border: 30,
         margintop: 20,
-        back: '#fff'
-
+        back: '#fff',
+        paddingStart: 30
+    },
+    buttonGreen: {
+        alignItems: 'center',
+        backgroundColor: '#00a748',
+        padding: 10,
     }
 }
 
