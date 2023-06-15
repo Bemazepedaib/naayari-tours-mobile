@@ -4,9 +4,10 @@ import StyledText from "../components/StyledText";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
 
-const Login = props => {
+function Login({ navigation }) {
 
     const onPress = () => { console.log("object") };
+    const onPress1 = () => { navigation.navigate('Menú principal', { screen: 'Perfil' }) };
 
     return (
         <View style={styles.container}>
@@ -23,7 +24,7 @@ const Login = props => {
                 </StyledButton>
             </View>
 
-            <StyledButton onPress={onPress}>
+            <StyledButton onPress={onPress1}>
                 <StyledText >Tabs</StyledText>
             </StyledButton>
         </View>
