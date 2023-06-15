@@ -12,11 +12,39 @@ import Profile from "../screens/Profile";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+function TripTabStack() {
+    <Tab.Navigator
+        screenOptions={{ headerShown: true }}
+    >
+        <Tab.Screen
+            name="Avisos de seguridad"
+            component={Security}
+        />
+    </Tab.Navigator>
+}
+
+function TripStack() {
+    return (
+        <Stack.Navigator
+            screenOptions={{ headerShown: true }}
+        >
+            <Stack.Screen
+                name="Viajes"
+                component={ActiveTrips}
+            />
+            <Stack.Screen
+                name="Viaje"
+                component={TripTabStack}
+            />
+        </Stack.Navigator>
+    )
+}
+
 function TabStack() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                headerShown: false,
+                headerShown: true,
                 tabBarIcon: ({ color, size }) => {
                     const icons = {
                         'Viajes activos': 'airplane',
@@ -38,7 +66,7 @@ function TabStack() {
             />
             <Tab.Screen
                 name="Viajes activos"
-                component={ActiveTrips}
+                component={TripStack}
             />
         </Tab.Navigator>
     )
