@@ -8,25 +8,32 @@ import ActiveTrips from "../screens/ActiveTrips";
 import Security from "../screens/Security";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
+import Itinerary from "../screens/Itinerary";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function TripTabStack() {
-    <Tab.Navigator
-        screenOptions={{ headerShown: true }}
-    >
-        <Tab.Screen
-            name="Avisos de seguridad"
-            component={Security}
-        />
-    </Tab.Navigator>
+    return (
+        <Tab.Navigator
+            screenOptions={{ headerShown: false }}
+        >
+            <Tab.Screen
+                name="Recomendaciones de seguridad"
+                component={Security}
+            />
+            <Tab.Screen 
+                name="Itinerario"
+                component={Itinerary}
+            />
+        </Tab.Navigator>
+    )
 }
 
 function TripStack() {
     return (
         <Stack.Navigator
-            screenOptions={{ headerShown: true }}
+            screenOptions={{ headerShown: false }}
         >
             <Stack.Screen
                 name="Viajes"
@@ -44,7 +51,7 @@ function TabStack() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                headerShown: true,
+                headerShown: false,
                 tabBarIcon: ({ color, size }) => {
                     const icons = {
                         'Viajes activos': 'airplane',
