@@ -7,8 +7,8 @@ function ActiveTrips({ navigation }) {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Viajes activos</Text>
             <Button
-                title='Ir a seguridad'
-                onPress={() => { navigation.navigate('Viaje') }}    
+                title='Ir a viaje'
+                onPress={() => { navigation.navigate('Viaje', { name: 'Custom' }) }}    
             >
             </Button>
         </View>
