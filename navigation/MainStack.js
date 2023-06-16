@@ -8,9 +8,44 @@ import ActiveTrips from "../screens/ActiveTrips";
 import Security from "../screens/Security";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
+import Itinerary from "../screens/Itinerary";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function TripTabStack() {
+    return (
+        <Tab.Navigator
+            screenOptions={{ headerShown: false }}
+        >
+            <Tab.Screen
+                name="Recomendaciones de seguridad"
+                component={Security}
+            />
+            <Tab.Screen 
+                name="Itinerario"
+                component={Itinerary}
+            />
+        </Tab.Navigator>
+    )
+}
+
+function TripStack() {
+    return (
+        <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen
+                name="Viajes"
+                component={ActiveTrips}
+            />
+            <Stack.Screen
+                name="Viaje"
+                component={TripTabStack}
+            />
+        </Stack.Navigator>
+    )
+}
 
 function TabStack() {
     return (
@@ -38,7 +73,7 @@ function TabStack() {
             />
             <Tab.Screen
                 name="Viajes activos"
-                component={ActiveTrips}
+                component={TripStack}
             />
         </Tab.Navigator>
     )
