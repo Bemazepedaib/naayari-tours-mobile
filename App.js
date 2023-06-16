@@ -1,23 +1,26 @@
-import { StyleSheet, SafeAreaView} from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import MainStack from './navigation/MainStack';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const httpLink = createHttpLink({
 	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI',
 });
 
-// const authLink = setContext((_, { headers }) => {
-// 	return {
-// 		headers: {
-// 			...headers,
-// 			authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ""
-// 		}
-// 	}
-// });
+const authLink = setContext((_, { headers }) => {
+	const token = AsyncStorage.getItem('token')
+	console.log(token)
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `Bearer ${token}` : "",
+		}
+	}
+});
 
 const client = new ApolloClient({
-	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI', //authLink.concat(httpLink),
+	uri: authLink.concat(httpLink),
 	cache: new InMemoryCache()
 });
 
