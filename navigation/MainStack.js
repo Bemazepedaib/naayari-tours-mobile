@@ -9,6 +9,8 @@ import Security from "../screens/Security";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
 import Itinerary from "../screens/Itinerary";
+import TripKit from "../screens/TripKit"
+import Places from "../screens/Places"
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -17,25 +19,18 @@ function TripTabStack() {
     return (
         <Tab.Navigator
             tabBarPosition="bottom"
-            screenOptions={({ route }) => ({
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => {
-                    const icons = {
-                        'Recomendaciones de seguridad': 'security',
-                        'Itinerario': 'airplane-clock',
-                    };
-                    return (
-                        <MaterialCommunityIcons
-                            name={icons[route.name]}
-                            color={color}
-                            size={size}
-                        />
-                    );
-                },
-            })}
+            screenOptions={{ headerShown: false }}
         >
             <Tab.Screen
-                name="Recomendaciones de seguridad"
+                name="Lugares"
+                component={Places}
+            />
+            <Tab.Screen
+                name="Kit de viaje"
+                component={TripKit}
+            />
+            <Tab.Screen
+                name="Seguridad"
                 component={Security}
             />
             <Tab.Screen
