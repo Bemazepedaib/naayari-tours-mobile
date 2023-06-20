@@ -12,7 +12,7 @@ function Profile({ navigation }) {
     const logout = async () => {
         try {
             await AsyncStorage.removeItem("tokenAppMovil")
-            DevSettings.reload()
+            navigation.navigate('Login');
         } catch (e) {
             console.log("problems")
         } finally {
