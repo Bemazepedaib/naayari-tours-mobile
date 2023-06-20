@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
         width: theme.inputNormal.width,
         height: theme.inputNormal.height,
         marginTop: theme.inputNormal.margintop,
-        backgroundColor: theme.inputNormal.back,
-        color: theme.colors.gray
+        backgroundColor: theme.colors.gray,
+        color: theme.inputNormal.back
     }
 })
 

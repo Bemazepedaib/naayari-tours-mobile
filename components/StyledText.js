@@ -26,10 +26,11 @@ const styles = StyleSheet.create({
     },
     head: {
         fontSize: theme.fontSizes.head
-    }
+    },
+
 })
 
-export default function StyledText({ children, color, fontSize, fontWeight, style, ...restOfProps }) {
+export default function StyledText({ children, color, fontSize, fontWeight, style, border, ...restOfProps }) {
 
     const textStyles = [
         styles.text,
@@ -38,7 +39,7 @@ export default function StyledText({ children, color, fontSize, fontWeight, styl
         color === 'gray' && styles.gray,
         fontSize === 'subheading' && styles.subheading,
         fontSize === 'head' && styles.head,
-        fontWeight === 'bold' && styles.bold
+        fontWeight === 'bold' && styles.bold,
 
     ]
     return (

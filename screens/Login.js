@@ -1,13 +1,17 @@
 import { React, useState, useEffect, useCallback } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, Dimensions, Image } from "react-native";
 import StyledText from "../components/StyledText";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
-
+import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 //Mutation
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../mutations/userMutations";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getStoreKeyName } from "@apollo/client/utilities";
+
+const { width, height } = Dimensions.get('window')
+
 
 function Login({ navigation }) {
 
@@ -70,9 +74,15 @@ function Login({ navigation }) {
 
     const onPress1 = () => { navigation.navigate('Menú principal', { screen: 'Perfil' }) };
 
+
+
+
+
+
     return (
         <View style={styles.container}>
             <View style={styles.mainInputs}>
+                <Image source={require('../assets/Top.jpg')} style={styles.img} />
                 <StyledText fontSize='head' fontWeight='bold'>Hola</StyledText>
                 <StyledText fontSize='subheading' color='gray'>Ingresa a tu cuenta</StyledText>
                 <StyledInput
@@ -94,7 +104,7 @@ function Login({ navigation }) {
                 <StyledButton button='buttonGreen' onPress={() => { onPress() }}>
                     <StyledText color='primary'>Iniciar Sesion</StyledText>
                 </StyledButton>
-                <StyledText color='primary'>{myError}</StyledText>
+                <StyledText color='primary' border={true}>{myError}</StyledText>
             </View>
             {req === true ?
                 <ActivityIndicator size="large" color="#00ff00" /> : ""
@@ -108,6 +118,8 @@ function Login({ navigation }) {
 }
 const styles = StyleSheet.create({
     container: {
+        height: height,
+        backgroundColor: "#ffffff",
         alignItems: 'center',
         justifyContent: 'center'
     },
