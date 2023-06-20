@@ -21,21 +21,21 @@ function Login({ navigation }) {
     const [login] = useMutation(LOGIN)
 
 
-    const onPress = async () => {
-
-        try {
-
-            setReq(true)
-            setToken((await login({ variables: { email: mail, password: pass } })).data.login.split("%")[2])
-            await setData()
-            setReq(false)
-            navigation.navigate('Menú principal', { screen: 'Perfil' })
-
-        } catch (error) {
-            setMyError(error.message);
-            setReq(false)
-        }
-
+    const onPress = () => {
+        setReq(true);
+        login({ variables: { email: mail, password: pass } })
+            .then((response) => {
+                setToken(response.data.login.split("%")[2]);
+                setData();
+            })
+            .then(() => {
+                setReq(false);
+                navigation.navigate('Menú principal', { screen: 'Perfil' });
+            })
+            .catch((error) => {
+                setMyError(error.message);
+                setReq(false);
+            });
     };
 
     setData = async () => {
