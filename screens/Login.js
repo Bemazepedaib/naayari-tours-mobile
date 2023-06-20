@@ -1,35 +1,36 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import StyledText from "../components/StyledText";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //Mutation
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../mutations/userMutations";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Login({ navigation }) {
-
 
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
     const [req, setReq] = useState(false)
     const [token, setToken] = useState()
-    const [myError, setMyError] = useState("");
+    const [myError, setMyError] = useState("")
 
 
     const [login] = useMutation(LOGIN)
 
 
     const onPress = async () => {
-        console.log(pass)
-        console.log(mail)
+
         try {
+
             setReq(true)
-            setToken((await login({ variables: { email: mail, password: pass } })).data.login.split("%"))
+            setToken((await login({ variables: { email: mail, password: pass } })).data.login.split("%")[2])
+            await setData()
+            setReq(false)
             navigation.navigate('Menú principal', { screen: 'Perfil' })
-            getData()
+
         } catch (error) {
             setMyError(error.message);
             setReq(false)
@@ -37,15 +38,19 @@ function Login({ navigation }) {
 
     };
 
+    setData = async () => {
+        try {
+            await AsyncStorage.setItem("tokenAppMovil", token)
+        } catch (e) {
+            console.log("Error al ingresar el token")
+        }
+    }
+
     getData = async () => {
         try {
-            const value = await AsyncStorage.getItem('token')
-            if (value != null) {
-                setToken(value)
-                console.log(value)
-            }
+            AsyncStorage.getItem("tokenAppMovil")
         } catch (e) {
-
+            console.log("get err " + e)
         }
     }
 
@@ -57,7 +62,6 @@ function Login({ navigation }) {
             } else if (token[0] === "guide") {
                 console.log("Es un guia bro")
             }
-            AsyncStorage.setItem('token', token[2])
         }
     }, [token])
 
@@ -87,7 +91,7 @@ function Login({ navigation }) {
             </View>
 
             <View>
-                <StyledButton button='buttonGreen' onPress={onPress}>
+                <StyledButton button='buttonGreen' onPress={() => { onPress() }}>
                     <StyledText color='primary'>Iniciar Sesion</StyledText>
                 </StyledButton>
                 <StyledText color='primary'>{myError}</StyledText>
