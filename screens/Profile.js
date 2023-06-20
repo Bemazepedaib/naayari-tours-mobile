@@ -8,11 +8,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Profile({ navigation }) {
 
-    const { loading, error, data } = useQuery(ME);
+
     const logout = async () => {
         try {
             await AsyncStorage.removeItem("tokenAppMovil")
-            DevSettings.reload()
+            navigation.navigate('Login');
         } catch (e) {
             console.log("problems")
         } finally {
@@ -22,12 +22,9 @@ function Profile({ navigation }) {
 
 
 
-    if (loading) return <Text>Loading...</Text>
-    if (error) return <Text>Error: {error.message}</Text>
-
-    return !loading && !error && (
+    return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>{console.log(data)} si bro</Text>
+            <Text> si entraste</Text>
             <StyledButton onPress={logout} >
                 <StyledText>Salir</StyledText>
             </StyledButton>
