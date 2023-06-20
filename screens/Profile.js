@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Text, View, Button, ActivityIndicator, RefreshControl, DevSettings } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import { useQuery, } from '@apollo/client';
 import { ME } from '../querys/userQuerys';
 import StyledButton from "../components/StyledButton";

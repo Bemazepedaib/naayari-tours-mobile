@@ -11,6 +11,7 @@ import Profile from "../screens/Profile";
 import Itinerary from "../screens/Itinerary";
 import TripKit from "../screens/TripKit"
 import Places from "../screens/Places"
+import Review from "../screens/Review";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -60,6 +61,10 @@ function TripStack() {
                 name="Viaje"
                 component={TripTabStack}
                 options={({ route }) => ({ title: route.params.name })}
+            />
+            <Stack.Screen
+                name="Reseña"
+                component={Review}
             />
         </Stack.Navigator>
     )
