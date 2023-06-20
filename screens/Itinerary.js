@@ -4,9 +4,12 @@ import { GET_TRIP } from '../querys/tripQuerys';
 import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 const image = { uri: 'https://images.unsplash.com/photo-1623176035122-4e07bc19bab7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80' };
 
-function Itinerary({ navigation }) {
+function Itinerary({ navigation, route }) {
+
+	const tripName = route.params.tripName
 	let a = 0;
-	const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: "Cascadas del Moco" } })
+
+	const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: tripName } })
 	if (error) return (<View><Text>{error.message}</Text></View>)
 
 	return !loading && !error && (

@@ -4,16 +4,16 @@ import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-nativ
 import { GET_TRIP } from '../querys/tripQuerys';
 const image = { uri: 'https://img.freepik.com/foto-gratis/hombre-guapo-viajando-su-mochila_23-2149118702.jpg?w=360&t=st=1686942180~exp=1686942780~hmac=038c278b5750629a549a10c58c264e42f2a79ae8218b85aa1ae76fde46ffd001' };
 
-function TripKit({ navigation }) {
+function TripKit({ navigation, route }) {
 
-    //const { tripName } = route.params;
-    let a=0;
+	const tripName = route.params.tripName
+	let a = 0;
 
-    const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: "Cascadas del Moco" } })
-    if (error) return ( <View><Text>{error.message}</Text></View> )
+	const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: tripName } })
+	if (error) return (<View><Text>{error.message}</Text></View>)
 
-    return !loading && !error && (
-        <View style={styles.container}>
+	return !loading && !error && (
+		<View style={styles.container}>
 			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
 				<Text style={styles.text}>Kit de Viajero</Text>
 				<ScrollView contentContainerStyle={styles.instructionsContainer}>
@@ -23,7 +23,7 @@ function TripKit({ navigation }) {
 				</ScrollView>
 			</ImageBackground>
 		</View>
-    )
+	)
 }
 
 const styles = StyleSheet.create({
