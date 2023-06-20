@@ -4,16 +4,16 @@ import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-nativ
 import { GET_TRIP } from '../querys/tripQuerys';
 const image = { uri: 'https://img.freepik.com/foto-gratis/vista-posterior-hombre-mochila-mirando-mapa-mientras-acampa_23-2148704449.jpg?w=1060&t=st=1686942202~exp=1686942802~hmac=305fb4e3b05ba1d26465f74dee649da5149fad421b5c30348ae343d7b70dc507' };
 
-function Places({ navigation }) {
+function Places({ navigation, route }) {
 
-    //const { tripName } = route.params;
-    let a=0;
+	const tripName = route.params.tripName
+	let a = 0;
 
-    const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: "Cascadas del Moco" } })
-    if (error) return ( <View><Text>{error.message}</Text></View> )
+	const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: tripName } })
+	if (error) return (<View><Text>{error.message}</Text></View>)
 
-    return !loading && !error && (
-        <View style={styles.container}>
+	return !loading && !error && (
+		<View style={styles.container}>
 			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
 				<Text style={styles.text}>Lugares recomendados</Text>
 				<ScrollView contentContainerStyle={styles.instructionsContainer}>
@@ -23,7 +23,7 @@ function Places({ navigation }) {
 				</ScrollView>
 			</ImageBackground>
 		</View>
-    )
+	)
 }
 
 const styles = StyleSheet.create({

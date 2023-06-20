@@ -4,16 +4,16 @@ import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-nativ
 import { GET_TRIP } from '../querys/tripQuerys';
 const image = { uri: 'https://img.freepik.com/foto-gratis/turista-estilo-hipster-escribiendo_23-2147652882.jpg?w=360&t=st=1686942294~exp=1686942894~hmac=f20d8187372b42d9e9b626d586aa5a9429b66adaca0cc9eb137e0317d96dd963' };
 
-function Security({ navigation }) {
+function Security({ navigation, route }) {
 
-    //const { tripName } = route.params;
-    let a=0;
+	const tripName = route.params.tripName
+	let a = 0;
 
-    const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: "Cascadas del Moco" } })
-    if (error) return ( <View><Text>{error.message}</Text></View> )
+	const { loading, error, data } = useQuery(GET_TRIP, { variables: { tripName: tripName } })
+	if (error) return (<View><Text>{error.message}</Text></View>)
 
-    return !loading && !error && (
-        <View style={styles.container}>
+	return !loading && !error && (
+		<View style={styles.container}>
 			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
 				<Text style={styles.text}>Recomendaciones de Seguridad</Text>
 				<ScrollView contentContainerStyle={styles.instructionsContainer}>
@@ -23,7 +23,7 @@ function Security({ navigation }) {
 				</ScrollView>
 			</ImageBackground>
 		</View>
-    )
+	)
 }
 
 const styles = StyleSheet.create({

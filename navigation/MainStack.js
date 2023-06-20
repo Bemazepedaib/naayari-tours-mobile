@@ -15,27 +15,33 @@ import Places from "../screens/Places"
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-function TripTabStack() {
+function TripTabStack({ route }) {
+    const tripName = route.params.name
+
     return (
         <Tab.Navigator
             tabBarPosition="bottom"
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: true }}
         >
             <Tab.Screen
                 name="Lugares"
                 component={Places}
+                initialParams={{ tripName: tripName }}
             />
             <Tab.Screen
                 name="Kit de viaje"
                 component={TripKit}
+                initialParams={{ tripName: tripName }}
             />
             <Tab.Screen
                 name="Seguridad"
                 component={Security}
+                initialParams={{ tripName: tripName }}
             />
             <Tab.Screen
                 name="Itinerario"
                 component={Itinerary}
+                initialParams={{ tripName: tripName }}
             />
         </Tab.Navigator>
     )

@@ -22,6 +22,11 @@ const ME = gql`
             preferences {
                 preferenceType
             }
+            trips {
+                tripDate
+                tripName
+                tripStatus
+            }
         }
     }
 `;
