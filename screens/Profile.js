@@ -31,7 +31,10 @@ function Profile({ navigation }) {
             <StyledButton onPress={logout} >
                 <StyledText>Salir</StyledText>
             </StyledButton>
-
+            <Button
+                title='Ir a viajes'
+                onPress={() => navigation.navigate('Viajes activos')}
+            ></Button>
         </View>
     )
 }

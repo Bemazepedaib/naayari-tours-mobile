@@ -47,11 +47,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-<<<<<<< HEAD
 	link: authLink.concat(httpLink),
-=======
-	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI',  //authLink.concat(httpLink),
->>>>>>> fef794a30b9541e68951b8b83aef1c677c13d9be
 	cache: new InMemoryCache()
 });
 
