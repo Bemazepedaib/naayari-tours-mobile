@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { GET_TRIP } from '../querys/tripQuerys';
-const image = { uri: 'https://img.freepik.com/foto-gratis/turista-estilo-hipster-escribiendo_23-2147652882.jpg?w=360&t=st=1686942294~exp=1686942894~hmac=f20d8187372b42d9e9b626d586aa5a9429b66adaca0cc9eb137e0317d96dd963' };
+const image = { uri: 'https://img.freepik.com/foto-gratis/hombre-guapo-viajando-su-mochila_23-2149118702.jpg?w=360&t=st=1686942180~exp=1686942780~hmac=038c278b5750629a549a10c58c264e42f2a79ae8218b85aa1ae76fde46ffd001' };
 
-function Security({ navigation }) {
+function TripKit({ navigation }) {
 
     //const { tripName } = route.params;
     let a=0;
@@ -15,9 +15,9 @@ function Security({ navigation }) {
     return !loading && !error && (
         <View style={styles.container}>
 			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
-				<Text style={styles.text}>Recomendaciones de Seguridad</Text>
+				<Text style={styles.text}>Kit de Viajero</Text>
 				<ScrollView contentContainerStyle={styles.instructionsContainer}>
-					{data.trip.tripInformation.recomendations.split("*").map(stop => (
+					{data.trip.tripKit.split("*").map(stop => (
 						stop !== "" ? <Text style={styles.text2} key={a++}>{stop}</Text> : null
 					))}
 				</ScrollView>
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Security
+export default TripKit;

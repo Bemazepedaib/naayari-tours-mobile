@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from "../screens/Home";
@@ -9,20 +9,31 @@ import Security from "../screens/Security";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
 import Itinerary from "../screens/Itinerary";
+import TripKit from "../screens/TripKit"
+import Places from "../screens/Places"
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 function TripTabStack() {
     return (
         <Tab.Navigator
+            tabBarPosition="bottom"
             screenOptions={{ headerShown: false }}
         >
             <Tab.Screen
-                name="Recomendaciones de seguridad"
+                name="Lugares"
+                component={Places}
+            />
+            <Tab.Screen
+                name="Kit de viaje"
+                component={TripKit}
+            />
+            <Tab.Screen
+                name="Seguridad"
                 component={Security}
             />
-            <Tab.Screen 
+            <Tab.Screen
                 name="Itinerario"
                 component={Itinerary}
             />
@@ -33,7 +44,7 @@ function TripTabStack() {
 function TripStack() {
     return (
         <Stack.Navigator
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: true }}
         >
             <Stack.Screen
                 name="Viajes"
@@ -42,6 +53,7 @@ function TripStack() {
             <Stack.Screen
                 name="Viaje"
                 component={TripTabStack}
+                options={({ route }) => ({ title: route.params.name })}
             />
         </Stack.Navigator>
     )
@@ -49,40 +61,28 @@ function TripStack() {
 
 function TabStack() {
     return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => {
-                    const icons = {
-                        'Viajes activos': 'airplane',
-                        'Perfil': 'account',
-                    };
-                    return (
-                        <MaterialCommunityIcons
-                            name={icons[route.name]}
-                            color={color}
-                            size={size}
-                        />
-                    );
-                },
-            })}
+        <Stack.Navigator
+            screenOptions={{ headerShown: true }}
         >
-            <Tab.Screen
+            <Stack.Screen
                 name="Perfil"
                 component={Profile}
             />
-            <Tab.Screen
+            <Stack.Screen
                 name="Viajes activos"
                 component={TripStack}
+                options={{ headerShown: false }}
             />
-        </Tab.Navigator>
+        </Stack.Navigator>
     )
 }
 
 function MainStack() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+                screenOptions={{ headerShown: false }}
+            >
                 <Stack.Screen
                     name="Login"
                     component={Login}
