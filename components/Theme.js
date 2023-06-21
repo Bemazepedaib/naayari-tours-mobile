@@ -25,7 +25,7 @@ const theme = {
         height: 50,
         border: 20,
         margintop: 20,
-        back: '#fff',
+        back: '#000',
         paddingStart: 30
     },
     buttonLogin: {
