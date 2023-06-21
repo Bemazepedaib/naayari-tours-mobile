@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     },
     but: {
-        marginTop: 20,
+        marginTop: 10,
         textAlign: "center"
     },
     see: {
