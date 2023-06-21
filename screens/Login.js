@@ -109,7 +109,7 @@ function Login({ navigation }) {
                     </StyledButton>
                     <StyledText style={styles.but} color='red'>{myError}</StyledText>
                     {req === true ?
-                        <ActivityIndicator size="large" color="#00ff00" /> : ""
+                        <ActivityIndicator size="large" color="#AEC597" /> : ""
                     }
                 </View>
             </View>
