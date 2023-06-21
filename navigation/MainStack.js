@@ -74,7 +74,6 @@ function TabStack() {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: true }}
-
         >
             <Stack.Screen
                 name="Perfil"
@@ -103,6 +102,7 @@ function MainStack() {
                 <Stack.Screen
                     name="Menú principal"
                     component={TabStack}
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer >
