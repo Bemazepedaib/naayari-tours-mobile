@@ -3,7 +3,9 @@ const theme = {
         textPrimary: '#24292e',
         textSecondary: '#586069',
         primary: '#ffffff',
-        gray: '#999999'
+        red: '#EC1D1D',
+        black: '#000000',
+        greenLogin: "#C0E39CBB",
     },
     fontSizes: {
         body: 14,
@@ -26,11 +28,17 @@ const theme = {
         back: '#fff',
         paddingStart: 30
     },
-    buttonGreen: {
+    buttonLogin: {
         alignItems: 'center',
         backgroundColor: '#00a748',
         padding: 10,
-        border: 20
+        border: 20,
+        borderWidth: 1,
+        borderColor: "#000000",
+    },
+    buttonSocial: {
+        alignItems: 'center',
+        border: 20,
     }
 }
 

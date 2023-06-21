@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         width: theme.inputNormal.width,
         height: theme.inputNormal.height,
         marginTop: theme.inputNormal.margintop,
-        backgroundColor: theme.colors.gray,
+        backgroundColor: theme.colors.white,
         color: theme.inputNormal.back
     }
 })
@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
 export default function StyledInput({ children, color, fontSize, fontWeight, input, style, ...restOfProps }) {
 
     const textStyles = [
-        styles.text,
+        style, styles.text,
         input === 'login' && styles.inputNormal,
-        color === 'gray' && styles.gray
+        color === 'white' && styles.colorPrimary
 
     ]
     return (

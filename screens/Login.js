@@ -81,37 +81,54 @@ function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <Image source={require('../assets/Top.jpg')} style={styles.img} blurRadius={4} />
             <View style={styles.mainInputs}>
-                <Image source={require('../assets/Top.jpg')} style={styles.img} />
-                <StyledText fontSize='head' fontWeight='bold'>Hola</StyledText>
-                <StyledText fontSize='subheading' color='gray'>Ingresa a tu cuenta</StyledText>
+                <View style={styles.head}>
+                    <StyledText style={styles.alig} fontSize='head' fontWeight='bold'>Hola</StyledText>
+                    <StyledText style={styles.alig} fontSize='subheading' >Ingresa a tu cuenta</StyledText>
+                </View>
                 <StyledInput
+                    style={styles.bord}
                     value={mail}
                     onChangeText={setMail}
                     placeholder="ejemplocorreo@gmail.com"
-                    input='login'>
+                    input='login'
+                >
                 </StyledInput>
                 <StyledInput
+                    style={styles.bord}
                     value={pass}
                     onChangeText={setPass}
                     placeholder="contraseña"
                     secureTextEntry={true}
                     input='login'>
                 </StyledInput>
+                <View>
+                    <StyledButton style={styles.but} button='buttonLogin' onPress={() => { onPress() }}>
+                        <StyledText color='black'>Iniciar Sesion</StyledText>
+                    </StyledButton>
+                    <StyledText style={styles.but} color='red'>{myError}</StyledText>
+                    {req === true ?
+                        <ActivityIndicator size="large" color="#00ff00" /> : ""
+                    }
+                </View>
+            </View>
+            <View style={styles.foot}>
+                <StyledText style={styles.see} fontSize="body" fontWeight='bold'>Visitanos en nuestras redes sociales</StyledText>
+                <View style={styles.buttonsSocialMedia}>
+
+                    <StyledButton style={styles.faceB} button='buttonSocial' onPress={() => { }}>
+                        <StyledText style={styles.face} fontSize="body" fontWeight='bold' color="primary" border={"normal"}><Image style={styles.sm1} source={require('../assets/Facebook.png')} /> Facebook</StyledText>
+                    </StyledButton>
+
+
+                    <StyledButton style={styles.tiktokB} button='buttonSocial' onPress={() => { }}>
+                        <StyledText style={styles.tiktok} fontSize="body" fontWeight='bold' color="primary" border={"normal"}><Image style={styles.sm2} source={require('../assets/TikTok.png')} /> Tik Tok</StyledText>
+                    </StyledButton>
+                </View>
+
             </View>
 
-            <View>
-                <StyledButton button='buttonGreen' onPress={() => { onPress() }}>
-                    <StyledText color='primary'>Iniciar Sesion</StyledText>
-                </StyledButton>
-                <StyledText color='primary' border={true}>{myError}</StyledText>
-            </View>
-            {req === true ?
-                <ActivityIndicator size="large" color="#00ff00" /> : ""
-            }
-            <StyledButton onPress={onPress1}>
-                <StyledText >Tabs</StyledText>
-            </StyledButton>
         </View>
     )
 
@@ -119,15 +136,104 @@ function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         height: height,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#AEC597",
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingTop: 80
     },
     mainInputs: {
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '90%'
+        width: '85%',
+        backgroundColor: "#ffffff",
+        height: height * .7,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#000000",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
+    img: {
+        position: "absolute",
+        height: height / 2,
+        resizeMode: "contain",
+        bottom: height / 2,
+    },
+    bord: {
+        borderWidth: 1,
+        borderColor: "#000000",
+        marginBottom: 25
+
+    },
+    alig: {
+        textAlign: "center"
+    },
+    head: {
+        marginTop: 50,
+        marginBottom: 50,
+    },
+    but: {
+        marginTop: 20,
+        textAlign: "center"
+    },
+    see: {
+        marginTop: 10,
+        textAlign: "center",
+        width: width
+    },
+    foot: {
+        backgroundColor: "#AEC597",
+        position: "absolute",
+        bottom: -50,
+        height: height * .15,
+        width: width,
+    },
+    buttonsSocialMedia: {
+        width: width,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 20
+    },
+    faceB: {
+        justifyContent: "center",
+        height: 50,
+    },
+    tiktokB: {
+        height: 50,
+        alignItems: "center",
+    },
+    face: {
+        textAlignVertical: "center",
+        textAlign: "center",
+        backgroundColor: "#3B579D",
+        height: 50,
+        width: 150,
+    },
+    tiktok: {
+        textAlignVertical: "center",
+        textAlign: "center",
+        backgroundColor: "#000000",
+        height: 50,
+        width: 150
+    },
+    sm1: {
+        width: 22, height: 22,
+        alignSelf: "center",
+        left: 30
+    },
+    sm2: {
+        width: 18, height: 18,
+        alignSelf: "center",
+        left: 30
+    }
+
 }
 )
 

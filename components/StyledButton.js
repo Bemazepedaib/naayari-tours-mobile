@@ -3,14 +3,20 @@ import { TouchableOpacity, StyleSheet } from 'react-native'
 import theme from './Theme'
 
 const styles = StyleSheet.create({
-    buttonGreen: {
+    buttonLogin: {
         top: 20,
-        alignItems: theme.buttonGreen.alignItems,
-        backgroundColor: theme.buttonGreen.backgroundColor,
-        padding: theme.buttonGreen.padding,
-        borderRadius: theme.buttonGreen.border,
+        alignItems: theme.buttonLogin.alignItems,
+        backgroundColor: theme.colors.primary,
+        padding: theme.buttonLogin.padding,
+        borderRadius: theme.buttonLogin.border,
         width: 150,
-
+        borderWidth: theme.buttonLogin.borderWidth,
+        borderColor: theme.buttonLogin.borderColor,
+    },
+    buttonSocial: {
+        alignItems: theme.buttonSocial.alignItems,
+        padding: theme.buttonSocial.padding,
+        borderRadius: theme.buttonSocial.border,
     }
 })
 
@@ -18,7 +24,9 @@ export default function StyledButton({ children, button, fontWeight, style, ...r
 
     const textStyles = [
         styles.text,
-        button === 'buttonGreen' && styles.buttonGreen
+        style,
+        button === 'buttonLogin' && styles.buttonLogin,
+        button === 'buttonSocial' && styles.buttonSocial,
 
     ]
     return (

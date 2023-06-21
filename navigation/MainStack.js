@@ -74,10 +74,12 @@ function TabStack() {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: true }}
+
         >
             <Stack.Screen
                 name="Perfil"
                 component={Profile}
+
             />
             <Stack.Screen
                 name="Viajes activos"
@@ -96,6 +98,7 @@ function MainStack() {
                 <Stack.Screen
                     name="Login"
                     component={Login}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name="Menú principal"
