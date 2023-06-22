@@ -3,17 +3,20 @@ import { View, StyleSheet, ActivityIndicator, Dimensions, Image } from "react-na
 import StyledText from "../components/StyledText";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
-import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 //Mutation
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN } from "../mutations/userMutations";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getStoreKeyName } from "@apollo/client/utilities";
+
+
+import { signIn, signOut, getToken } from '../Utils/Util'
+
 
 const { width, height } = Dimensions.get('window')
 
 
 function Login({ navigation }) {
+
+
 
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
@@ -24,59 +27,21 @@ function Login({ navigation }) {
 
     const [login] = useMutation(LOGIN)
 
-
     const onPress = () => {
         setReq(true);
         login({ variables: { email: mail, password: pass } })
             .then((response) => {
-                setToken(response.data.login.split("%")[2]);
-                setData();
+                signIn(response.data.login.split("%")[2])
+                navigation.navigate('Menú principal', { screen: 'Perfil' });
             })
             .then(() => {
                 setReq(false);
-                navigation.navigate('Menú principal', { screen: 'Perfil' });
             })
             .catch((error) => {
                 setMyError(error.message);
                 setReq(false);
             });
     };
-
-    setData = async () => {
-        try {
-            await AsyncStorage.setItem("tokenAppMovil", token)
-        } catch (e) {
-            console.log("Error al ingresar el token")
-        }
-    }
-
-    getData = async () => {
-        try {
-            AsyncStorage.getItem("tokenAppMovil")
-        } catch (e) {
-            console.log("get err " + e)
-        }
-    }
-
-    useEffect(() => {
-        if (token) {
-            if (token[0] === "client") {
-                console.log("Es un cliente")
-
-            } else if (token[0] === "guide") {
-                console.log("Es un guia bro")
-            }
-        }
-    }, [token])
-
-
-
-
-    const onPress1 = () => { navigation.navigate('Menú principal', { screen: 'Perfil' }) };
-
-
-
-
 
 
     return (

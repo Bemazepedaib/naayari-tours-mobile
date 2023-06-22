@@ -3,25 +3,11 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context'
 import MainStack from './navigation/MainStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { signIn, signOut, getToken } from './Utils/Util'
 
-let value = ""
 
-const getToken = async () => {
 
-	try {
-
-		let v = await AsyncStorage.getItem("tokenAppMovil")
-		console.log(v)
-		if (v !== null) {
-			value = "Bearer " + v
-		} else {
-			console.log("Es null bro")
-		}
-	} catch (e) {
-		console.log("Error al obtener token")
-	}
-}
 //initiate apollo client
 const httpLink = createHttpLink({
 	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI',
@@ -35,12 +21,12 @@ const httpLink = createHttpLink({
 // })
 
 
-const authLink = setContext((_, { headers }) => {
-	getToken()
+const authLink = setContext(async (_, { headers }) => {
+	const tok = await getToken()
 	return {
 		headers: {
 			...headers,
-			Authorization: value ? value : ""
+			Authorization: tok ? `Bearer ${tok}` : ""
 
 		}
 	}
@@ -52,6 +38,8 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+
+
 	return (
 		<ApolloProvider client={client}>
 			<SafeAreaView style={styles.container}>

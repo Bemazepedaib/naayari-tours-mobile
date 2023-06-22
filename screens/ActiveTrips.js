@@ -9,7 +9,7 @@ function ActiveTrips({ navigation }) {
     let a = 0;
 
     if (loading) return <View><ActivityIndicator size="large" /></View>
-    if (error) return <View>Error: {error.message}</View>
+    if (error) return <Text>Error: {error.message}</Text>
 
     const closed = data.me.trips.filter(trip => trip.tripStatus === "closed")
     const inactive = data.me.trips.filter(trip => trip.tripStatus === "inactive")
