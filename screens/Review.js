@@ -1,14 +1,17 @@
 import React from 'react'
 import { Text, View, Button, StyleSheet, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as Google from 'expo-google-app-auth';
+import * as AuthSession from 'expo-auth-session';
 
-const CLIENT_ID = '1079743757256-ptjqs7b2vk6rd0k69mroni2c2fhaed7h.apps.googleusercontent.com';
-const SCOPE = 'https://www.googleapis.com/auth/drive.file';
+const config = {
+    clientId: '1079743757256-ptjqs7b2vk6rd0k69mroni2c2fhaed7h.apps.googleusercontent.com',
+    redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
+    scopes: ['https://www.googleapis.com/auth/drive.file'],
+};
 
 function Review({ navigation, route }) {
 
-    const tripName = route.params.tripName
+    const tripName = route.params.name
 
     const [imageUri, setImageUri] = React.useState(null);
 
@@ -43,30 +46,33 @@ function Review({ navigation, route }) {
     };
 
     const authenticateWithGoogle = async () => {
-        try {
-            const { type, accessToken } = await Google.logInAsync({
-                androidClientId: CLIENT_ID,
-                scopes: [SCOPE],
-            });
-
-            if (type === 'success') {
-                return accessToken;
-            } else {
-                console.log('Google authentication cancelled');
-                return null;
-            }
-        } catch (error) {
-            console.log('Google authentication error:', error);
-            return null;
+        const { type, params } = await AuthSession.startAsync({ authUrl: getAuthUrl() });
+        if (type === 'success') {
+            // Handle the authentication response
+            const accessToken = params.access_token;
+            // Use the access token for further API requests or other purposes
+            uploadToGoogleDrive(accessToken);
+        } else if (type === 'error') {
+            // Handle error case
+            console.log('Error:', params.errorCode, params.errorDescription);
+        } else {
+            // Handle cancel case
+            console.log('Google authentication cancelled');
         }
     };
 
-    const uploadToGoogleDrive = async () => {
-        const accessToken = await authenticateWithGoogle();
-        if (!accessToken) {
-            return;
-        }
+    const getAuthUrl = () => {
+        const { clientId, redirectUri, scopes } = config;
+        const queryParams = new URLSearchParams({
+            response_type: 'token',
+            client_id: clientId,
+            redirect_uri: redirectUri,
+            scope: scopes.join(' '),
+        });
+        return `https://accounts.google.com/o/oauth2/v2/auth?${queryParams.toString()}`;
+    };
 
+    const uploadToGoogleDrive = async (accessToken) => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
             console.log('Permission to access media library denied');
@@ -118,7 +124,7 @@ function Review({ navigation, route }) {
             {imageUri && <Image source={{ uri: imageUri }} style={{ width: 300, height: 300 }} />}
             <Button
                 title='Haz una reseña'
-                onPress={() => { uploadToGoogleDrive() }}
+                onPress={() => { authenticateWithGoogle() }}
             />
         </View>
     )
