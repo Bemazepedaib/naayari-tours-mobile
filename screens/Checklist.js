@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, FlatList, ImageBackground, Text } from 'react-native';
 import CustomCheckBox from '../components/CustomCheckBox';
-import { useQuery, } from '@apollo/client';
-import { GET_EVENT } from '../querys/eventQuerys';
+
+const image = { uri: 'https://img.freepik.com/foto-gratis/fondo-textura-papel-blanco_23-2148171218.jpg?w=740&t=st=1687562259~exp=1687562859~hmac=fe9ee0f2a0907a52c8fe0432e1d91674fe2d2a034fb6b7acc8b71fba84e5fdb0' };
 
 function Checklist({ navigation, route }) {
 
-    const tripName = route.params.tripName
-    const tripDate = route.params.tripDate
-
     let id = 1;
-    const DATA = [];
 
-    const { loading, error, data } = useQuery(GET_EVENT, { variables: { eventTrip: tripName, eventDate: tripDate } });
-
-    const [listData, setListData] = useState([]);
+    const paramData = route.params.data
+    const usersData = [];
 
     const handleCheckboxChange = itemId => {
         const newData = listData.map(item =>
@@ -31,29 +26,33 @@ function Checklist({ navigation, route }) {
         />
     );
 
+
     const fillData = () => {
-        data.event.users.map(user => {
+        paramData && paramData.event.users.map(user => {
             if (user.companion.length > 0) {
-                DATA.push({ id: id++, label: user.userEmail, checked: false })
+                usersData.push({ id: id++, label: user.userName, checked: false })
                 user.companion.map(comp => {
-                    DATA.push({ id: id++, label: comp.companionName, checked: false })
+                    usersData.push({ id: id++, label: comp.companionName, checked: false })
                 })
             } else {
-                DATA.push({ id: id++, label: user.userEmail, checked: false })
+                usersData.push({ id: id++, label: user.userName, checked: false })
             }
         })
+        return usersData
     }
 
-    if (loading) return <View><ActivityIndicator size="large" /></View>
-    if (error) return <Text>Error: {error.message}</Text>
+    const [listData, setListData] = useState(fillData());
 
-    return !loading && !error && (
+    return (
         <View style={styles?.container}>
-            <FlatList
-                data={listData}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            />
+            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                <Text style={styles.text}>Pase de lista</Text>
+                <FlatList
+                    data={listData}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                />
+            </ImageBackground>
         </View>
     )
 }
@@ -61,8 +60,24 @@ function Checklist({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        position: 'relative'
     },
+    image: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    text: {
+		top: 0,
+		textTransform: 'uppercase',
+		width: '100%',
+		color: 'white',
+		fontSize: 20,
+		lineHeight: 44,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		opacity: 0.7,
+		backgroundColor: '#000000c0',
+	}
 });
 
 export default Checklist

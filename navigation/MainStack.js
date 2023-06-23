@@ -16,6 +16,7 @@ import Checklist from "../screens/Checklist";
 
 import { useQuery, } from '@apollo/client';
 import { ME_PI } from '../querys/userQuerys';
+import { GET_EVENT } from '../querys/eventQuerys';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -24,9 +25,10 @@ function TripTabStack({ route }) {
     const tripName = route.params.name
     const tripDate = route.params.date
 
-    const { loading, error, data } = useQuery(ME_PI);
+    const { loading: meLoading, error: meError, data: meData } = useQuery(ME_PI);
+    const { loading: eventLoading, error: eventError, data: eventData } = useQuery(GET_EVENT, { variables: { eventTrip: tripName, eventDate: tripDate } });
 
-    return !loading && !error && (
+    return !meLoading && !meError && !eventLoading && !eventError && (
         <Tab.Navigator
             tabBarPosition="bottom"
             screenOptions={
@@ -56,11 +58,11 @@ function TripTabStack({ route }) {
                 component={Itinerary}
                 initialParams={{ tripName: tripName }}
             />
-            {data.me.userType === "client" ? null :
+            {meData.me.userType === "client" ? null :
                 <Tab.Screen
                     name="Lista"
                     component={Checklist}
-                    initialParams={{ tripName: tripName, tripDate: tripDate }}
+                    initialParams={{ data: eventData }}
                 />}
         </Tab.Navigator>
     )

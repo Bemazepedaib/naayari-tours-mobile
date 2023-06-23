@@ -10,6 +10,7 @@ const GET_EVENT = gql`
             eventStatus
             users {
                 userEmail
+                userName
                 advancePayment
                 fullPayment
                 advancePaid
