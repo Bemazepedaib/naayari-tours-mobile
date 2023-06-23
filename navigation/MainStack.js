@@ -12,17 +12,29 @@ import Itinerary from "../screens/Itinerary";
 import TripKit from "../screens/TripKit"
 import Places from "../screens/Places"
 import Review from "../screens/Review";
+import Checklist from "../screens/Checklist";
+
+import { useQuery, } from '@apollo/client';
+import { ME_PI } from '../querys/userQuerys';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 function TripTabStack({ route }) {
     const tripName = route.params.name
+    const tripDate = route.params.date
 
-    return (
+    const { loading, error, data } = useQuery(ME_PI);
+
+    return !loading && !error && (
         <Tab.Navigator
             tabBarPosition="bottom"
-            screenOptions={{ headerShown: true }}
+            screenOptions={
+                {
+                    headerShown: true,
+                    tabBarLabelStyle: { fontSize: 9 }
+                }
+            }
         >
             <Tab.Screen
                 name="Lugares"
@@ -44,6 +56,12 @@ function TripTabStack({ route }) {
                 component={Itinerary}
                 initialParams={{ tripName: tripName }}
             />
+            {data.me.userType === "client" ? null :
+                <Tab.Screen
+                    name="Lista"
+                    component={Checklist}
+                    initialParams={{ tripName: tripName, tripDate: tripDate }}
+                />}
         </Tab.Navigator>
     )
 }

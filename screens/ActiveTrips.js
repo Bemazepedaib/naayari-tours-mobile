@@ -19,7 +19,7 @@ function ActiveTrips({ navigation }) {
             {closed.length > 0 ? <Text style={styles.titulo}>Viajes activos</Text> : null}
             {closed.map(trip => (
                 <TouchableOpacity key={a++}
-                    onPress={() => { navigation.navigate('Viaje', { name: trip.tripName }) }}
+                    onPress={() => { navigation.navigate('Viaje', { name: trip.tripName, date: trip.tripDate }) }}
                 >
                     <View style={styles.flex}>
                         <Text style={styles.text1}>{trip.tripName}</Text>

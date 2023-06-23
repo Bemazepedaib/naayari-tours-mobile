@@ -31,35 +31,29 @@ const ME = gql`
     }
 `;
 
-
-const GET_USERS = gql`
-    query getUsers {
-        users {
+const ME_PI = gql`
+    query getMe {
+        me {
             name
             cellphone
             birthDate
             email
             password
             sex
-            reference
             userType
             userLevel
             membership
-            coupons {
-                couponType
-                couponDescription
-                couponAmount
-                couponDate
-                couponApplied
-            }
-            preferences {
-                preferenceType
-            }
         }
     }
 `;
 
+const GET_USER = gql`
+    query getUser($email: String){
+        user(email: $email) {
+            name
+            cellphone
+        }
+    }
+`;
 
-export {
-    ME, GET_USERS
-};
+export { ME, ME_PI, GET_USER };

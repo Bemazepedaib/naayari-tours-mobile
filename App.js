@@ -2,24 +2,11 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context'
 import MainStack from './navigation/MainStack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from 'react';
-import { signIn, signOut, getToken } from './Utils/Util'
+import { getToken } from './Utils/Util'
 
-
-
-//initiate apollo client
 const httpLink = createHttpLink({
 	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI',
 })
-// const authLink = setContext((_, { headers }) => {
-// 	return {
-// 		headers: {
-// 			authorization: token ? `Bearer ${token}` : ""
-// 		}
-// 	}
-// })
-
 
 const authLink = setContext(async (_, { headers }) => {
 	const tok = await getToken()
@@ -38,7 +25,6 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-
 
 	return (
 		<ApolloProvider client={client}>
