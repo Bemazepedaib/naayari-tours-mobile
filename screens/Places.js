@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { GET_TRIP } from '../querys/tripQuerys';
-const image = { uri: 'https://img.freepik.com/foto-gratis/vista-posterior-hombre-mochila-mirando-mapa-mientras-acampa_23-2148704449.jpg?w=1060&t=st=1686942202~exp=1686942802~hmac=305fb4e3b05ba1d26465f74dee649da5149fad421b5c30348ae343d7b70dc507' };
+const image = { uri: 'https://img.freepik.com/foto-gratis/feliz-ciudad-turistica-mapa_329181-477.jpg?w=740&t=st=1687631114~exp=1687631714~hmac=c11c0d7fce58f1acc010f5e2a6a469904dc9755f3d0d5992d6496e7f8fd0dd9c' };
 
 function Places({ navigation, route }) {
 
