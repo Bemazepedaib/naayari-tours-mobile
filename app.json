@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "904b01fb-df20-496b-a519-f3eb9257ed1d"
+      }
+    },
+    "owner": "naayaritours"
   }
 }

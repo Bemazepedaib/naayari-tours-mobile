@@ -1,15 +1,14 @@
 import { gql } from "@apollo/client";
 
-const GET_USERS = gql`
-    query getUsers {
-        users {
+const ME = gql`
+    query getMe {
+        me {
             name
             cellphone
             birthDate
             email
             password
             sex
-            reference
             userType
             userLevel
             membership
@@ -23,10 +22,38 @@ const GET_USERS = gql`
             preferences {
                 preferenceType
             }
+            trips {
+                tripDate
+                tripName
+                tripStatus
+            }
         }
     }
 `;
 
-export { 
-    GET_USERS
-};
+const ME_PI = gql`
+    query getMe {
+        me {
+            name
+            cellphone
+            birthDate
+            email
+            password
+            sex
+            userType
+            userLevel
+            membership
+        }
+    }
+`;
+
+const GET_USER = gql`
+    query getUser($email: String){
+        user(email: $email) {
+            name
+            cellphone
+        }
+    }
+`;
+
+export { ME, ME_PI, GET_USER };

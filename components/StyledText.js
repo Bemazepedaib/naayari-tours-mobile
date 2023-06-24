@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         color: theme.colors.textPrimary,
         fontSize: theme.fontSizes.body,
         fontFamily: theme.fonts.main,
-        fontWeight: theme.fontWeights.normal
+        fontWeight: theme.fontWeights.normal,
     },
     colorPrimary: {
         color: theme.colors.primary
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     colorSecondary: {
         color: theme.colors.textSecondary
     },
-    gray: {
-        color: theme.colors.gray
+    red: {
+        color: theme.colors.red
     },
     bold: {
         fontWeight: theme.fontWeights.bold
@@ -26,19 +26,24 @@ const styles = StyleSheet.create({
     },
     head: {
         fontSize: theme.fontSizes.head
+    },
+    border: {
+        borderRadius: theme.buttonLogin.border
     }
+
 })
 
-export default function StyledText({ children, color, fontSize, fontWeight, style, ...restOfProps }) {
+export default function StyledText({ children, color, fontSize, fontWeight, style, border, ...restOfProps }) {
 
     const textStyles = [
-        styles.text,
+        style, styles.text,
         color === 'primary' && styles.colorPrimary,
         color === 'secondary' && styles.colorSecondary,
-        color === 'gray' && styles.gray,
+        color === 'red' && styles.red,
         fontSize === 'subheading' && styles.subheading,
         fontSize === 'head' && styles.head,
-        fontWeight === 'bold' && styles.bold
+        fontWeight === 'bold' && styles.bold,
+        border === 'normal' && styles.border,
 
     ]
     return (

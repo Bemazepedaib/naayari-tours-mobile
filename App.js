@@ -1,33 +1,37 @@
-import { StyleSheet, SafeAreaView} from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { setContext } from '@apollo/client/link/context'
 import MainStack from './navigation/MainStack';
+import { getToken } from './Utils/Util'
 
 const httpLink = createHttpLink({
 	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI',
+})
+
+const authLink = setContext(async (_, { headers }) => {
+	const tok = await getToken()
+	return {
+		headers: {
+			...headers,
+			Authorization: tok ? `Bearer ${tok}` : ""
+
+		}
+	}
 });
 
-// const authLink = setContext((_, { headers }) => {
-// 	return {
-// 		headers: {
-// 			...headers,
-// 			authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ""
-// 		}
-// 	}
-// });
-
 const client = new ApolloClient({
-	uri: 'https://naayari-tours-backend.up.railway.app/NaayarAPI', //authLink.concat(httpLink),
+	link: authLink.concat(httpLink),
 	cache: new InMemoryCache()
 });
 
 export default function App() {
+
 	return (
-		<SafeAreaView style={styles.container}>
-			<ApolloProvider client={client}>
+		<ApolloProvider client={client}>
+			<SafeAreaView style={styles.container}>
 				<MainStack />
-			</ApolloProvider>
-		</SafeAreaView>
+			</SafeAreaView>
+		</ApolloProvider>
 	);
 }
 

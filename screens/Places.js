@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { GET_TRIP } from '../querys/tripQuerys';
-const image = { uri: 'https://img.freepik.com/foto-gratis/turista-estilo-hipster-escribiendo_23-2147652882.jpg?w=360&t=st=1686942294~exp=1686942894~hmac=f20d8187372b42d9e9b626d586aa5a9429b66adaca0cc9eb137e0317d96dd963' };
+const image = { uri: 'https://img.freepik.com/foto-gratis/vista-posterior-hombre-mochila-mirando-mapa-mientras-acampa_23-2148704449.jpg?w=1060&t=st=1686942202~exp=1686942802~hmac=305fb4e3b05ba1d26465f74dee649da5149fad421b5c30348ae343d7b70dc507' };
 
-function Security({ navigation, route }) {
+function Places({ navigation, route }) {
 
 	const tripName = route.params.tripName
 	let a = 0;
@@ -15,9 +15,9 @@ function Security({ navigation, route }) {
 	return !loading && !error && (
 		<View style={styles.container}>
 			<ImageBackground source={image} resizeMode="cover" style={styles.image}>
-				<Text style={styles.text}>Recomendaciones de Seguridad</Text>
+				<Text style={styles.text}>Lugares recomendados</Text>
 				<ScrollView contentContainerStyle={styles.instructionsContainer}>
-					{data.trip.tripInformation.recomendations.split("*").map(stop => (
+					{data.trip.tripInformation.recommendedPlaces.split("*").map(stop => (
 						stop !== "" ? <Text style={styles.text2} key={a++}>{stop}</Text> : null
 					))}
 				</ScrollView>
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Security
+export default Places;
