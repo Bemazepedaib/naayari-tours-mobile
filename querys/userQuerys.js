@@ -52,6 +52,8 @@ const GET_USER = gql`
         user(email: $email) {
             name
             cellphone
+            guideDescription
+            guidePhoto
         }
     }
 `;

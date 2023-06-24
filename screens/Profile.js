@@ -1,5 +1,5 @@
 import { React } from 'react'
-import { Image, View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { Image, View, Text, StyleSheet, ImageBackground,Button } from 'react-native';
 import { useQuery, } from '@apollo/client';
 import { ME } from '../querys/userQuerys';
 import StyledButton from "../components/StyledButton";
@@ -12,7 +12,6 @@ function Profile({ navigation }) {
     const { loading, error, data } = useQuery(ME);
     return !loading && !error && (
         <ImageBackground source={image1} resizeMode="cover" style={styles.imageBack}>
-            {console.log(data.me)}
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
                     <Text style={styles.text}>¡HOLA NAAYARO!</Text>
@@ -20,10 +19,14 @@ function Profile({ navigation }) {
                         style={styles.nayaariLogo}
                         source={require('../img/Oll.png')} />
                     <View style={styles.whiteSquare}>
-                        <Text style={styles.textName}>{data.me.name}</Text>
+                        <Text style={styles.textInfo}>{data.me.name}</Text>
                         <Text style={styles.textInfo}>Correo: {data.me.email}</Text>
                         <Text style={styles.textInfo}>Celular: {data.me.cellphone}</Text>
                         <Text style={styles.textInfo}>Dia de nacimiento: {data.me.birthDate}</Text>
+                        <Button
+                            title='Ir a viajes'
+                            onPress={() => navigation.navigate('Viajes activos')}
+                        ></Button> 
                     </View>
                 </View>
                 {/*                 <StyledButton onPress={logout} >
@@ -84,12 +87,6 @@ const styles = StyleSheet.create({
         opacity: 0.7,
         backgroundColor: '#000000c0',
         borderRadius: 10,
-    },
-    textName: {
-        fontSize: 30,
-        lineHeight: 44,
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
     },
     textInfo: {
         fontSize: 12,

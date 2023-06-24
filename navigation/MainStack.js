@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,DevSettings} from 'react-native';
+import { Button, DevSettings } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native'
@@ -12,7 +12,8 @@ import TripKit from "../screens/TripKit"
 import Places from "../screens/Places"
 import Review from "../screens/Review";
 import Checklist from "../screens/Checklist";
-import {signOut } from '../Utils/Util'
+import Guide from "../screens/Guide";
+import { signOut } from '../Utils/Util'
 
 import { useQuery, } from '@apollo/client';
 import { ME_PI } from '../querys/userQuerys';
@@ -58,7 +59,13 @@ function TripTabStack({ route }) {
                 component={Itinerary}
                 initialParams={{ tripName: tripName }}
             />
-            {meData.me.userType === "client" ? null :
+            {meData.me.userType === "client" ?
+                <Tab.Screen
+                    name="Guía"
+                    component={Guide}
+                    initialParams={{ data: eventData }}
+                />
+                :
                 <Tab.Screen
                     name="Lista"
                     component={Checklist}
@@ -110,13 +117,13 @@ function TabStack() {
                 component={Profile}
                 options={{
                     headerLeft: () => (
-                      <Button
-                        onPress={() => logout()}
-                        title="Cerrar Sesión"
-                        color="red"
-                      />
+                        <Button
+                            onPress={() => logout()}
+                            title="Cerrar Sesión"
+                            color="red"
+                        />
                     ),
-                  }}
+                }}
             />
             <Stack.Screen
                 name="Viajes activos"
