@@ -1,5 +1,5 @@
-import { React, useState } from 'react'
-import { Image, View, Text, DevSettings, StyleSheet, ImageBackground } from 'react-native';
+import { React } from 'react'
+import { Image, View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { useQuery, } from '@apollo/client';
 import { ME } from '../querys/userQuerys';
 import StyledButton from "../components/StyledButton";
@@ -10,16 +10,6 @@ const image1 = { uri: 'https://img.freepik.com/foto-gratis/paisaje-montanoso-nie
 function Profile({ navigation }) {
 
     const { loading, error, data } = useQuery(ME);
-    const logout = async () => {
-        try {
-            signOut()
-            DevSettings.reload()
-        } catch (e) {
-            console.log("problems")
-        } finally {
-
-        }
-    };
     return !loading && !error && (
         <ImageBackground source={image1} resizeMode="cover" style={styles.imageBack}>
             {console.log(data.me)}

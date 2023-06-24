@@ -1,9 +1,8 @@
 import React from "react";
+import { Button,DevSettings} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Home from "../screens/Home";
 import ActiveTrips from "../screens/ActiveTrips";
 import Security from "../screens/Security";
 import Login from "../screens/Login";
@@ -13,6 +12,7 @@ import TripKit from "../screens/TripKit"
 import Places from "../screens/Places"
 import Review from "../screens/Review";
 import Checklist from "../screens/Checklist";
+import {signOut } from '../Utils/Util'
 
 import { useQuery, } from '@apollo/client';
 import { ME_PI } from '../querys/userQuerys';
@@ -91,6 +91,16 @@ function TripStack() {
 }
 
 function TabStack() {
+    const logout = async () => {
+        try {
+            signOut()
+            DevSettings.reload()
+        } catch (e) {
+            console.log(e)
+        } finally {
+
+        }
+    };
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: true }}
@@ -98,7 +108,15 @@ function TabStack() {
             <Stack.Screen
                 name="Perfil"
                 component={Profile}
-
+                options={{
+                    headerLeft: () => (
+                      <Button
+                        onPress={() => logout()}
+                        title="Cerrar Sesión"
+                        color="red"
+                      />
+                    ),
+                  }}
             />
             <Stack.Screen
                 name="Viajes activos"
