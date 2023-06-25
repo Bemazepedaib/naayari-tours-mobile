@@ -15,7 +15,6 @@ function Guide({ navigation, route }) {
     useEffect(() => {
         if (data) {
             setimageUrl(`https://drive.google.com/uc?id=${data.user.guidePhoto}`);
-            console.log(data)
         }
     }, [data]);
 
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     infoContainer: {
         flex: 1,
         alignItems: 'center',
-        width: '90%',
+        width: '100%',
     },
     container: {
         flex: 1,
@@ -60,22 +59,21 @@ const styles = StyleSheet.create({
         zIndex: 2
     },
     text: {
-        margin: 10,
-        textTransform: 'uppercase',
-        width: '100%',
-        color: 'white',
-        fontSize: 20,
-        lineHeight: 44,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        opacity: 0.7,
-        backgroundColor: '#000000c0',
-        borderRadius: 10
-    },
+		top: 0,
+		textTransform: 'uppercase',
+		width: '100%',
+		color: 'white',
+		fontSize: 20,
+		lineHeight: 44,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		opacity: 0.7,
+		backgroundColor: '#000000c0',
+	},
     whiteSquare: {
         position: 'relative',
         top: -70,
-        width: '90%',
+        width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
         height: 350,

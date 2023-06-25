@@ -35,7 +35,7 @@ function TripTabStack({ route }) {
             screenOptions={
                 {
                     headerShown: true,
-                    tabBarLabelStyle: { fontSize: 9 }
+                    tabBarLabelStyle: { fontSize: 8 }
                 }
             }
         >
