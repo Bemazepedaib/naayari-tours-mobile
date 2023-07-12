@@ -10,7 +10,6 @@ import Profile from "../screens/Profile";
 import Itinerary from "../screens/Itinerary";
 import TripKit from "../screens/TripKit"
 import Places from "../screens/Places"
-import Review from "../screens/Review";
 import Checklist from "../screens/Checklist";
 import Guide from "../screens/Guide";
 import { signOut } from '../Utils/Util'
@@ -88,10 +87,6 @@ function TripStack() {
                 name="Viaje"
                 component={TripTabStack}
                 options={({ route }) => ({ title: route.params.name })}
-            />
-            <Stack.Screen
-                name="Reseña"
-                component={Review}
             />
         </Stack.Navigator>
     )

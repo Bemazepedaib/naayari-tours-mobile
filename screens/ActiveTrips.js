@@ -29,9 +29,7 @@ function ActiveTrips({ navigation }) {
             ))}
             {inactive.length > 0 ? <Text style={styles.titulo}>Viajes pasados</Text> : null}
             {inactive.map(trip => (
-                <TouchableOpacity key={a++}
-                    onPress={() => { navigation.navigate('Reseña', { name: trip.tripName }) }}
-                >
+                <TouchableOpacity key={a++}>
                     <View style={styles.flex}>
                         <Text style={styles.text1}>{trip.tripName}</Text>
                         <Text style={styles.text1}>{trip.tripDate}</Text>

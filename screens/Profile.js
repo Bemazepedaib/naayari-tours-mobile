@@ -17,7 +17,7 @@ function Profile({ navigation }) {
                     <Text style={styles.text}>¡HOLA NAAYARO!</Text>
                     <Image
                         style={styles.nayaariLogo}
-                        source={require('../img/Oll.png')} />
+                        source={require('../assets/Oll.png')} />
                     <View style={styles.whiteSquare}>
                         <Text style={styles.textInfo}>{data.me.name}</Text>
                         <Text style={styles.textInfo}>Correo: {data.me.email}</Text>
@@ -29,13 +29,6 @@ function Profile({ navigation }) {
                         ></Button> 
                     </View>
                 </View>
-                {/*                 <StyledButton onPress={logout} >
-                    <StyledText>Salir</StyledText>
-                </StyledButton>
-                <Button
-                    title='Ir a viajes'
-                    onPress={() => navigation.navigate('Viajes activos')}
-                ></Button> */}
             </View>
         </ImageBackground>
     )
