@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useQuery, } from '@apollo/client';
 import { ME } from '../querys/userQuerys';
 

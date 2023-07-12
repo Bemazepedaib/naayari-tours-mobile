@@ -2,10 +2,6 @@ import { React } from 'react'
 import { Image, View, Text, StyleSheet, ImageBackground,Button } from 'react-native';
 import { useQuery, } from '@apollo/client';
 import { ME } from '../querys/userQuerys';
-import StyledButton from "../components/StyledButton";
-import StyledText from '../components/StyledText';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { signIn, signOut, getToken } from '../Utils/Util'
 const image1 = { uri: 'https://img.freepik.com/foto-gratis/paisaje-montanoso-niebla_1150-18329.jpg?w=740&t=st=1687632103~exp=1687632703~hmac=1d74c0f1d0e105fbf449ad80fc8cca23eb82bb7d0752041ba14501bfdfce172f' }
 function Profile({ navigation }) {
 

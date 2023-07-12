@@ -1,29 +1,24 @@
-import { React, useState, useEffect, useCallback } from "react";
+import { React, useState } from "react";
 import { View, StyleSheet, ActivityIndicator, Dimensions, Image } from "react-native";
 import StyledText from "../components/StyledText";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
 //Mutation
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { LOGIN } from "../mutations/userMutations";
 
 
-import { signIn, signOut, getToken } from '../Utils/Util'
-
+import { signIn } from '../Utils/Util'
 
 const { width, height } = Dimensions.get('window')
 
-
 function Login({ navigation }) {
-
-
 
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
     const [req, setReq] = useState(false)
     const [token, setToken] = useState()
     const [myError, setMyError] = useState("")
-
 
     const [login] = useMutation(LOGIN)
 
